@@ -1,14 +1,36 @@
+<html>
 <div id="searchFormD" style="position: absolute; width: 245px; z-index: 3647;">
   <div class="searchform" style="background:#f16928;border-radius:10px;color:#fff;padding:15px;height:125px;">
-      <form action="http://portal.shiptrack.ca/view.aspx" method="GET" target="_self">
+      <form action="http://portal.shiptrack.ca/view.aspx" id="searchinput" method="GET" target="_blank">
       <strong>TRACK YOUR PARCEL</strong> <img src="http://shiptrackapp.com/wp-content/themes/Shiptrack/images/searchq_03.png" alt="search help" style="float: right; margin-top: -8px; margin-right: 5px;">
         <div class="searchit">
           <div class="searchittop"><input type="text" name="tracking" style="border:none;float:left;height:32px;width:185px;">
           <div style="float:left;background:#fff;height:32px"><div style="border: solid 1px #ccc;float:left;height:26px;margin-top:5px;height:24px;"></div></div>
           <input type="image" src="http://shiptrackapp.com/wp-content/themes/Shiptrack/images/searchimg.png" style="float:left;"></div><div style="clear:both;"></div>
           <div style="float:left;background:#fff;height:32px;border-top:solid 1px #ccc;height:32px;width:210px;padding-top:5px;padding-left:5px;font-weight:bold;color:#666" class="searchitbot">ex. 34714592</div>
-          <input type="hidden" name="lng" value="en">
+          <input type="hidden" name="lng" id="lnginput" value="">
+          <input type="hidden" name="company" id="companyinput" value="">
         </div>
       </form>
   </div>
 </div>
+
+<script>
+window.onload = function(e){ 
+	document.getElementById('companyinput').value = getParamValue("company");
+	document.getElementById('lnginput').value = getParamValue("lng");
+	document.getElementById('searchinput').target = getParamValue("target");
+}
+function getParamValue(paramName)
+{
+    var url = window.location.search.substring(1); //get rid of "?" in querystring
+    var qArray = url.split('&'); //get key-value pairs
+    for (var i = 0; i < qArray.length; i++) 
+    {
+        var pArr = qArray[i].split('='); //split key and value
+        if (pArr[0] == paramName) 
+            return pArr[1]; //return value
+    }
+}
+</script>
+</html>
